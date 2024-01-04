@@ -1,16 +1,20 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class DeploymentConfigStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const lambda1 = new cdk.aws_lambda.Function(this, 'Lambda1', {
+      runtime: cdk.aws_lambda.Runtime.NODEJS_20_X,
+      code: cdk.aws_lambda.Code.fromAsset('lambda'),
+      handler: 'lambda1.handler'
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'DeploymentConfigQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const lambda2 = new cdk.aws_lambda.Function(this, 'Lambda2', {
+      runtime: cdk.aws_lambda.Runtime.NODEJS_20_X,
+      code: cdk.aws_lambda.Code.fromAsset('lambda'),
+      handler: 'lambda2.handler'
+    });
   }
 }
