@@ -70,7 +70,7 @@ export class DeploymentConfigStack extends cdk.Stack {
         alarms: [
           new aws_cloudwatch.Alarm(params.lambda, "DeploymentAlarm", {
             metric: alias.metricErrors({ period: cdk.Duration.minutes(1) }),
-            threshold: params.deploymentAlarmErrorsThreshold || 10,
+            threshold: params.deploymentAlarmErrorsThreshold || 1,
             alarmDescription: `${params.lambda.functionName} ${newVersion.version} canary deployment failure alarm`,
             evaluationPeriods: 1,
           }),
